@@ -1,0 +1,36 @@
+realtor add moses@realrealtors.com RealRealtors 10
+realtor add_apartment_service moses@realrealtors.com my_service 10
+realtor add_apartment moses@realrealtors.com my_service 1 1300000 3 4 wwweweewewew
+realtor add_apartment moses@realrealtors.com my_service 2 2100000 4 4 eeewweweeweewewe
+
+realtor add jack@cheapwork.com CheapWorkInc 2
+realtor add_apartment_service jack@cheapwork.com sales 10
+realtor add_apartment jack@cheapwork.com sales 1 600000 2 3 eewwwe
+realtor add_apartment_service jack@cheapwork.com cheap 10
+realtor add_apartment jack@cheapwork.com cheap 1 800000 3 3 eewewewee
+
+report significant_realtors 2
+
+# Will show an error, '@' is missing in the email
+realtor add invalid_email company 1
+
+customer add johny@mail.com 5 3 1500000
+report relevant_realtors johny@mail.com
+
+customer add jessica@mail.com 6 2 2000000
+report relevant_realtors jessica@mail.com
+
+# Nothing will be printed, no customer paid yet
+report most_paying_customers 2
+
+customer purchase johny@mail.com moses@realrealtors.com my_service 1
+
+# Won't succeed: the price is too high
+customer purchase jessica@mail.com moses@realrealtors.com my_service 2
+
+customer make_offer jessica@mail.com moses@realrealtors.com my_service 2 2000000
+realtor respond_to_offer moses@realrealtors.com jessica@mail.com accept
+
+customer purchase jessica@mail.com jack@cheapwork.com cheap 1
+
+report most_paying_customers 2
